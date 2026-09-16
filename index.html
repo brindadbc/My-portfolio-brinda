@@ -110,6 +110,19 @@ nav{
 .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;}
 .menu-toggle span{width:24px;height:2px;background:var(--gold);border-radius:2px;}
 
+/* ============ LANG SWITCH ============ */
+.lang-switch{
+  display:flex;align-items:center;
+  border:1px solid var(--border);background:var(--card);
+  border-radius:30px;padding:3px;gap:2px;flex-shrink:0;
+}
+.lang-switch button{
+  font-family:var(--mono);font-size:0.75rem;font-weight:600;
+  border:none;background:transparent;color:var(--text-dim);
+  padding:0.4rem 0.7rem;border-radius:20px;cursor:pointer;transition:all .2s;
+}
+.lang-switch button.active{background:var(--gold);color:#0a0a0a;}
+
 /* ============ BUTTONS ============ */
 .btn{
   display:inline-flex;align-items:center;gap:0.5rem;
@@ -516,32 +529,36 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 <nav>
   <div class="nav-content">
     <div class="logo">BC<span>.dev</span></div>
+    <div class="lang-switch" id="langSwitch">
+      <button data-lang="fr" class="active">FR</button>
+      <button data-lang="en">EN</button>
+    </div>
     <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
       <span></span><span></span><span></span>
     </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#accueil">Accueil</a></li>
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#apropos">À propos</a></li>
-      <li><a href="#competences">Compétences</a></li>
-      <li><a href="#parcours">Parcours</a></li>
-      <li><a href="#projets">Projets</a></li>
-      <li><a href="#avis">Avis</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#accueil" data-i18n="nav.home">Accueil</a></li>
+      <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
+      <li><a href="#apropos" data-i18n="nav.about">À propos</a></li>
+      <li><a href="#competences" data-i18n="nav.skills">Compétences</a></li>
+      <li><a href="#parcours" data-i18n="nav.path">Parcours</a></li>
+      <li><a href="#projets" data-i18n="nav.projects">Projets</a></li>
+      <li><a href="#avis" data-i18n="nav.testimonials">Avis</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
-    <div class="nav-status"><span class="dot"></span> Disponible pour un stage/emploi</div>
+    <div class="nav-status"><span class="dot"></span> <span data-i18n="nav.available">Disponible pour un stage/emploi</span></div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="accueil" class="hero">
-  <div class="hero-badge">// Bonjour, je suis</div>
+  <div class="hero-badge" data-i18n="hero.badge">// Bonjour, je suis</div>
   <h1>BRINDA CARELLE<br><span class="outline">DJUIKOUO</span></h1>
-  <div class="hero-subtitle-box">{ Développeuse Full Stack }</div>
-  <p class="hero-tagline">Étudiante en Informatique à Yaoundé — je conçois des applications web, mobiles et des solutions ERP, du back-end au déploiement.</p>
+  <div class="hero-subtitle-box" data-i18n="hero.subtitle">{ Développeuse Full Stack }</div>
+  <p class="hero-tagline" data-i18n="hero.tagline">Étudiante en Informatique à Yaoundé (Licence 2) — je conçois des applications web, mobiles et des solutions ERP, du back-end au déploiement.</p>
   <div class="hero-cta">
-    <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-    <a href="cv.html" target="_blank" rel="noopener" class="btn btn-outline">⬇ Télécharger mon CV</a>
+    <a href="#projets" class="btn btn-primary" data-i18n="hero.ctaProjects">Voir mes projets</a>
+    <a href="cv.html" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="hero.ctaCv">⬇ Télécharger mon CV</a>
   </div>
   <div class="hero-social">
     <a href="https://github.com/brindadbc" target="_blank" title="GitHub">GH</a>
@@ -558,18 +575,18 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <div class="terminal-line"><span class="prompt">$</span> whoami</div>
       <div class="terminal-line" id="typedLine"><span class="typed"></span></div>
       <div class="terminal-bar-track"><div class="terminal-bar-fill" id="termFill"></div></div>
-      <div class="terminal-pct" id="termPct">Chargement du profil… 0%</div>
+      <div class="terminal-pct" id="termPct" data-i18n-tpl="terminal.loading">Chargement du profil… 0%</div>
     </div>
   </div>
 
-  <div class="scroll-hint">Découvrir ↓</div>
+  <div class="scroll-hint" data-i18n="hero.scroll">Découvrir ↓</div>
 </section>
 
 <!-- STACK / ORBITE MERN -->
 <section id="stack">
-  <div class="eyebrow">// Stack principale</div>
-  <h2 class="sec-title reveal">Ma stack de prédilection</h2>
-  <p class="sec-desc reveal">Les quatre technologies au cœur de la plupart de mes applications web.</p>
+  <div class="eyebrow" data-i18n="stack.eyebrow">// Stack principale</div>
+  <h2 class="sec-title reveal" data-i18n="stack.title">Ma stack de prédilection</h2>
+  <p class="sec-desc reveal" data-i18n="stack.desc">Les quatre technologies au cœur de la plupart de mes applications web.</p>
 
   <div class="orbit-section reveal">
     <div class="orbit-wrap">
@@ -577,7 +594,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <div class="orbit-track"></div>
       <div class="orbit-track inner"></div>
       <div class="orbit-center">
-        <span class="line1">Développeuse</span>
+        <span class="line1" data-i18n="stack.orbitLine1">Développeuse</span>
         <span class="line2">MERN Stack</span>
       </div>
       <div class="orbit-ring">
@@ -587,36 +604,36 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
         <div class="orbit-node n-mongo"><div class="node-inner"><div class="node-circle">🍃</div><span class="node-label">MongoDB</span></div></div>
       </div>
     </div>
-    <p class="orbit-desc">Je développe des applications web complètes avec la stack MERN : MongoDB pour les données, Express.js et Node.js pour le back-end, React.js pour le front-end. Le tout déployé avec Docker et des services cloud.</p>
+    <p class="orbit-desc" data-i18n="stack.orbitDesc">Je développe des applications web complètes avec la stack MERN : MongoDB pour les données, Express.js et Node.js pour le back-end, React.js pour le front-end. Le tout déployé avec Docker et des services cloud.</p>
     <div class="orbit-stack-tags"><span>API REST</span><span>JWT / Auth</span><span>Mongoose</span><span>Docker</span><span>Render</span></div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="apropos">
-  <div class="eyebrow">// About</div>
-  <h2 class="sec-title reveal">Qui je suis</h2>
-  <p class="sec-desc reveal">Une brève présentation de mon profil et de mon approche du développement.</p>
+  <div class="eyebrow" data-i18n="about.eyebrow">// About</div>
+  <h2 class="sec-title reveal" data-i18n="about.title">Qui je suis</h2>
+  <p class="sec-desc reveal" data-i18n="about.desc">Une brève présentation de mon profil et de mon approche du développement.</p>
   <div class="about-grid">
     <div class="about-photo-wrap reveal">
       <img src="brin.jpeg" alt="Brinda Carelle DJUIKOUO" class="about-photo">
       <div class="about-sticker">Fullstack Dev</div>
     </div>
     <div class="about-text reveal">
-      <p>Développeuse full stack polyvalente et étudiante en informatique à Yaoundé, passionnée par la création de solutions numériques qui répondent à des besoins concrets.</p>
-      <p>Je travaille aussi bien sur le web (MERN, Next.js, Nest.js, Laravel, Django) que sur le mobile (Flutter) et les systèmes ERP (Odoo), et je maîtrise le déploiement de bout en bout avec Docker et des services cloud comme Firebase, Supabase, Cloudinary et Render.</p>
-      <p>Curieuse et rigoureuse, je suis toujours en train d'apprendre de nouveaux outils pour livrer des produits solides et bien pensés.</p>
+      <p data-i18n="about.p1">Développeuse full stack polyvalente et étudiante en informatique à Yaoundé, passionnée par la création de solutions numériques qui répondent à des besoins concrets.</p>
+      <p data-i18n="about.p2">Je travaille aussi bien sur le web (MERN, Next.js, Nest.js, Laravel, Django) que sur le mobile (Flutter) et les systèmes ERP (Odoo), et je maîtrise le déploiement de bout en bout avec Docker et des services cloud comme Firebase, Supabase, Cloudinary et Render.</p>
+      <p data-i18n="about.p3">Curieuse et rigoureuse, je suis toujours en train d'apprendre de nouveaux outils pour livrer des produits solides et bien pensés.</p>
       <div class="about-tags">
-        <span class="about-tag">Développement Front-End</span>
-        <span class="about-tag">Développement Back-End</span>
-        <span class="about-tag">Résolution de problèmes</span>
-        <span class="about-tag">Travail d'équipe</span>
+        <span class="about-tag" data-i18n="about.tag1">Développement Front-End</span>
+        <span class="about-tag" data-i18n="about.tag2">Développement Back-End</span>
+        <span class="about-tag" data-i18n="about.tag3">Résolution de problèmes</span>
+        <span class="about-tag" data-i18n="about.tag4">Travail d'équipe</span>
       </div>
       <div class="info-card">
-        <div class="info-row"><div class="k">Nom</div><div class="v">Brinda Carelle DJUIKOUO</div></div>
-        <div class="info-row"><div class="k">Email</div><div class="v">brinda25042007@gmail.com</div></div>
-        <div class="info-row"><div class="k">Téléphone</div><div class="v">+237 689 99 18 40</div></div>
-        <div class="info-row"><div class="k">Localisation</div><div class="v">Yaoundé, Cameroun</div></div>
+        <div class="info-row"><div class="k" data-i18n="about.name">Nom</div><div class="v">Brinda Carelle DJUIKOUO</div></div>
+        <div class="info-row"><div class="k" data-i18n="about.email">Email</div><div class="v">brinda25042007@gmail.com</div></div>
+        <div class="info-row"><div class="k" data-i18n="about.phone">Téléphone</div><div class="v">+237 689 99 18 40</div></div>
+        <div class="info-row"><div class="k" data-i18n="about.location">Localisation</div><div class="v" data-i18n="about.locationVal">Yaoundé, Cameroun</div></div>
       </div>
     </div>
   </div>
@@ -624,12 +641,12 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- SKILLS -->
 <section id="competences">
-  <div class="eyebrow">// Compétences</div>
-  <h2 class="sec-title reveal">Mes compétences</h2>
-  <p class="sec-desc reveal">Un aperçu des technologies et outils que j'utilise au quotidien.</p>
+  <div class="eyebrow" data-i18n="skills.eyebrow">// Compétences</div>
+  <h2 class="sec-title reveal" data-i18n="skills.title">Mes compétences</h2>
+  <p class="sec-desc reveal" data-i18n="skills.desc">Un aperçu des technologies et outils que j'utilise au quotidien.</p>
 
   <div class="skills-top reveal">
-    <h3>▸ Compétences principales</h3>
+    <h3 data-i18n="skills.mainTitle">▸ Compétences principales</h3>
     <div class="skill-row"><div class="skill-row-top"><span>JavaScript / TypeScript</span><span class="pct">90%</span></div><div class="skill-track"><div class="skill-fill" data-w="90"></div></div></div>
     <div class="skill-row"><div class="skill-row-top"><span>PHP / Laravel</span><span class="pct">88%</span></div><div class="skill-track"><div class="skill-fill" data-w="88"></div></div></div>
     <div class="skill-row"><div class="skill-row-top"><span>React / Next.js</span><span class="pct">85%</span></div><div class="skill-track"><div class="skill-fill" data-w="85"></div></div></div>
@@ -639,7 +656,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
   <div class="skill-categories">
     <div class="skill-cat reveal">
-      <h4>Front-End</h4>
+      <h4 data-i18n="skills.catFrontend">Front-End</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#e34f26">H5</div><span class="tname">HTML5</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#2965f1">C3</div><span class="tname">CSS3</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#f7df1e;color:#0a0a0a">JS</div><span class="tname">JavaScript</span></div>
@@ -648,7 +665,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <div class="tech-badge-row"><div class="tech-icon" style="background:#000">N</div><span class="tname">Next.js</span></div>
     </div>
     <div class="skill-cat reveal">
-      <h4>Back-End</h4>
+      <h4 data-i18n="skills.catBackend">Back-End</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#3c873a">JS</div><span class="tname">Node.js</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#e0234e">Ns</div><span class="tname">Nest.js</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#777bb4">PHP</div><span class="tname">PHP</span></div>
@@ -657,27 +674,27 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <div class="tech-badge-row"><div class="tech-icon" style="background:#0c4b33">Dj</div><span class="tname">Django</span></div>
     </div>
     <div class="skill-cat reveal">
-      <h4>Mobile & ERP</h4>
+      <h4 data-i18n="skills.catMobile">Mobile & ERP</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#02569b">Fl</div><span class="tname">Flutter</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#0175c2">Dt</div><span class="tname">Dart</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#714b67">Od</div><span class="tname">Odoo</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#2496ed">🐳</div><span class="tname">Docker</span></div>
     </div>
     <div class="skill-cat reveal">
-      <h4>Bases de données</h4>
+      <h4 data-i18n="skills.catDb">Bases de données</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#47a248">🍃</div><span class="tname">MongoDB</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#4479a1">SQL</div><span class="tname">MySQL</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#336791">PG</div><span class="tname">PostgreSQL</span></div>
     </div>
     <div class="skill-cat reveal">
-      <h4>Cloud & Services</h4>
+      <h4 data-i18n="skills.catCloud">Cloud & Services</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#ffca28;color:#0a0a0a">🔥</div><span class="tname">Firebase</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#3ecf8e;color:#0a0a0a">Sb</div><span class="tname">Supabase</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#3448c5">Cl</div><span class="tname">Cloudinary</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#46e3b7;color:#0a0a0a">Rd</div><span class="tname">Render</span></div>
     </div>
     <div class="skill-cat reveal">
-      <h4>Versioning & API</h4>
+      <h4 data-i18n="skills.catVersioning">Versioning & API</h4>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#f05032">Git</div><span class="tname">Git</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#171515">GH</div><span class="tname">GitHub</span></div>
       <div class="tech-badge-row"><div class="tech-icon" style="background:#555">API</div><span class="tname">REST API</span></div>
@@ -687,41 +704,41 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- PARCOURS -->
 <section id="parcours">
-  <div class="eyebrow">// Éducation & Expérience</div>
-  <h2 class="sec-title reveal">Mon parcours</h2>
-  <p class="sec-desc reveal">Ma formation académique et mes expériences professionnelles.</p>
+  <div class="eyebrow" data-i18n="path.eyebrow">// Éducation & Expérience</div>
+  <h2 class="sec-title reveal" data-i18n="path.title">Mon parcours</h2>
+  <p class="sec-desc reveal" data-i18n="path.desc">Ma formation académique et mes expériences professionnelles.</p>
 
   <div class="parcours-tabs">
-    <button class="p-tab active" data-tab="edu">🎓 Formation</button>
-    <button class="p-tab" data-tab="exp">💼 Expérience</button>
-    <button class="p-tab" data-tab="cert">🏆 Certifications</button>
+    <button class="p-tab active" data-tab="edu"><span data-i18n="path.tabEdu">🎓 Formation</span></button>
+    <button class="p-tab" data-tab="exp"><span data-i18n="path.tabExp">💼 Expérience</span></button>
+    <button class="p-tab" data-tab="cert"><span data-i18n="path.tabCert">🏆 Certifications</span></button>
   </div>
 
   <div class="t-panel active" id="panel-edu">
     <div class="timeline">
       <div class="t-item reveal">
-        <div class="t-date">2025 – 2026 · En cours</div>
-        <div class="t-title">Licence 2 — Informatique</div>
-        <div class="t-org">Yaoundé, Cameroun</div>
-        <p class="t-desc">Approfondissement en génie logiciel, bases de données et architectures d'applications.</p>
+        <div class="t-date" data-i18n="path.edu1.date">2025 – 2026 · En cours</div>
+        <div class="t-title" data-i18n="path.edu1.title">Licence 2 — Informatique</div>
+        <div class="t-org" data-i18n="path.edu1.org">Yaoundé, Cameroun</div>
+        <p class="t-desc" data-i18n="path.edu1.desc">Approfondissement en génie logiciel, bases de données et architectures d'applications.</p>
       </div>
       <div class="t-item reveal">
         <div class="t-date">2023 – 2025</div>
-        <div class="t-title">BTS — Informatique</div>
-        <div class="t-org">Yaoundé, Cameroun</div>
-        <p class="t-desc">Formation technique en développement d'applications et systèmes d'information.</p>
+        <div class="t-title" data-i18n="path.edu2.title">BTS — Informatique</div>
+        <div class="t-org" data-i18n="path.edu2.org">Yaoundé, Cameroun</div>
+        <p class="t-desc" data-i18n="path.edu2.desc">Formation technique en développement d'applications et systèmes d'information.</p>
       </div>
       <div class="t-item reveal">
         <div class="t-date">2024</div>
-        <div class="t-title">Formation Full Stack (MERN)</div>
+        <div class="t-title" data-i18n="path.edu3.title">Formation Full Stack (MERN)</div>
         <div class="t-org">LocalHost Academy</div>
-        <p class="t-desc">Formation intensive : JavaScript, React.js, Node.js, MongoDB.</p>
+        <p class="t-desc" data-i18n="path.edu3.desc">Formation intensive : JavaScript, React.js, Node.js, MongoDB.</p>
       </div>
       <div class="t-item reveal">
-        <div class="t-date">2022 – 2023</div>
-        <div class="t-title">Baccalauréat Série C (Scientifique)</div>
-        <div class="t-org">Yaoundé, Cameroun</div>
-        <p class="t-desc">Série scientifique, spécialité mathématiques/physique.</p>
+        <div class="t-date" data-i18n="path.edu4.date">2022 – 2023</div>
+        <div class="t-title" data-i18n="path.edu4.title">Baccalauréat Série C (Scientifique)</div>
+        <div class="t-org" data-i18n="path.edu4.org">Yaoundé, Cameroun</div>
+        <p class="t-desc" data-i18n="path.edu4.desc">Série scientifique, spécialité mathématiques/physique.</p>
       </div>
     </div>
   </div>
@@ -729,23 +746,23 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
   <div class="t-panel" id="panel-exp">
     <div class="timeline">
       <div class="t-item reveal">
-        <div class="t-date">Nov 2024 – Présent</div>
-        <div class="t-title">Développeuse Full Stack</div>
+        <div class="t-date" data-i18n="path.exp1.date">Nov 2024 – Présent</div>
+        <div class="t-title" data-i18n="path.exp1.title">Développeuse Full Stack</div>
         <div class="t-org">LocalHost Academy · Yaoundé</div>
         <ul class="t-desc">
-          <li>Développement d'applications web complètes avec architectures scalables</li>
-          <li>Création d'un portail d'emploi avec suivi des candidatures</li>
-          <li>Interfaces modernes et responsives avec React.js</li>
+          <li data-i18n="path.exp1.li1">Développement d'applications web complètes avec architectures scalables</li>
+          <li data-i18n="path.exp1.li2">Création d'un portail d'emploi avec suivi des candidatures</li>
+          <li data-i18n="path.exp1.li3">Interfaces modernes et responsives avec React.js</li>
         </ul>
       </div>
       <div class="t-item reveal">
-        <div class="t-date">Avr – Juin 2025</div>
-        <div class="t-title">Stagiaire Développeuse Web</div>
-        <div class="t-org">Chambre des Comptes du Cameroun · Yaoundé</div>
+        <div class="t-date" data-i18n="path.exp2.date">Avr – Juin 2025</div>
+        <div class="t-title" data-i18n="path.exp2.title">Stagiaire Développeuse Web</div>
+        <div class="t-org" data-i18n="path.exp2.org">Chambre des Comptes du Cameroun · Yaoundé</div>
         <ul class="t-desc">
-          <li>Développement de l'Observatoire des Collectivités Territoriales</li>
-          <li>Tableaux de bord interactifs et cartes géographiques</li>
-          <li>Amélioration de 40% de la lisibilité des données</li>
+          <li data-i18n="path.exp2.li1">Développement de l'Observatoire des Collectivités Territoriales</li>
+          <li data-i18n="path.exp2.li2">Tableaux de bord interactifs et cartes géographiques</li>
+          <li data-i18n="path.exp2.li3">Amélioration de 40% de la lisibilité des données</li>
         </ul>
       </div>
     </div>
@@ -755,21 +772,21 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="timeline">
       <div class="t-item reveal">
         <div class="t-date">2024</div>
-        <div class="t-title">Certification — Développement Full Stack PHP</div>
+        <div class="t-title" data-i18n="path.cert1.title">Certification — Développement Full Stack PHP</div>
         <div class="t-org">LocalHost Academy</div>
-        <p class="t-desc">Développement d'applications web avec PHP et le framework Laravel : architecture MVC, gestion de base de données et API.</p>
+        <p class="t-desc" data-i18n="path.cert1.desc">Développement d'applications web avec PHP et le framework Laravel : architecture MVC, gestion de base de données et API.</p>
       </div>
       <div class="t-item reveal">
         <div class="t-date">2024</div>
-        <div class="t-title">Certification — Développement Mobile Flutter</div>
+        <div class="t-title" data-i18n="path.cert2.title">Certification — Développement Mobile Flutter</div>
         <div class="t-org">LocalHost Academy</div>
-        <p class="t-desc">Création d'applications mobiles cross-platform (iOS/Android) avec Flutter et Dart.</p>
+        <p class="t-desc" data-i18n="path.cert2.desc">Création d'applications mobiles cross-platform (iOS/Android) avec Flutter et Dart.</p>
       </div>
       <div class="t-item reveal">
         <div class="t-date">2024</div>
-        <div class="t-title">Certification — Développement Web JavaScript (Full Stack)</div>
+        <div class="t-title" data-i18n="path.cert3.title">Certification — Développement Web JavaScript (Full Stack)</div>
         <div class="t-org">LocalHost Academy</div>
-        <p class="t-desc">Développement full stack avec JavaScript : React.js, Node.js, Express.js et MongoDB (stack MERN).</p>
+        <p class="t-desc" data-i18n="path.cert3.desc">Développement full stack avec JavaScript : React.js, Node.js, Express.js et MongoDB (stack MERN).</p>
       </div>
     </div>
   </div>
@@ -777,12 +794,12 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- PROJECTS -->
 <section id="projets">
-  <div class="eyebrow">// Projets</div>
-  <h2 class="sec-title reveal">Mes projets</h2>
-  <p class="sec-desc reveal">Quelques réalisations qui illustrent mes compétences.</p>
+  <div class="eyebrow" data-i18n="projects.eyebrow">// Projets</div>
+  <h2 class="sec-title reveal" data-i18n="projects.title">Mes projets</h2>
+  <p class="sec-desc reveal" data-i18n="projects.desc">Quelques réalisations qui illustrent mes compétences.</p>
 
   <div class="filter-row">
-    <button class="f-btn active" data-filter="all">Tous</button>
+    <button class="f-btn active" data-filter="all"><span data-i18n="projects.filterAll">Tous</span></button>
     <button class="f-btn" data-filter="web">Web</button>
     <button class="f-btn" data-filter="mobile">Mobile</button>
     <button class="f-btn" data-filter="erp">ERP</button>
@@ -792,8 +809,8 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="project-card reveal" data-cat="web">
       <div class="project-top"><span class="project-icon">💼</span><span class="project-tag">Web</span></div>
       <div class="project-content">
-        <div class="project-title">Portail d'Emploi</div>
-        <p class="project-desc">Application complète de gestion de candidatures avec matching automatique CV/offres et dashboard analytics en temps réel.</p>
+        <div class="project-title" data-i18n="projects.p1.title">Portail d'Emploi</div>
+        <p class="project-desc" data-i18n="projects.p1.desc">Application complète de gestion de candidatures avec matching automatique CV/offres et dashboard analytics en temps réel.</p>
         <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
       </div>
     </div>
@@ -802,7 +819,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <div class="project-top"><span class="project-icon">🛠️</span><span class="project-tag">Mobile / Web</span></div>
       <div class="project-content">
         <div class="project-title">Gadgets</div>
-        <p class="project-desc">Application mobile et web publiée sur le Play Store, avec une expérience unifiée sur les deux plateformes et une intégration cloud.</p>
+        <p class="project-desc" data-i18n="projects.p2.desc">Application mobile et web publiée sur le Play Store, avec une expérience unifiée sur les deux plateformes et une intégration cloud.</p>
         <div class="project-tags"><span>Flutter</span><span>Firebase</span><span>Next.js</span></div>
       </div>
     </div>
@@ -810,8 +827,8 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="project-card reveal" data-cat="web">
       <div class="project-top"><span class="project-icon">📊</span><span class="project-tag">Web</span></div>
       <div class="project-content">
-        <div class="project-title">Observatoire des Collectivités</div>
-        <p class="project-desc">Plateforme de visualisation de données financières avec tableaux de bord interactifs et cartes géographiques.</p>
+        <div class="project-title" data-i18n="projects.p3.title">Observatoire des Collectivités</div>
+        <p class="project-desc" data-i18n="projects.p3.desc">Plateforme de visualisation de données financières avec tableaux de bord interactifs et cartes géographiques.</p>
         <div class="project-tags"><span>Laravel</span><span>MySQL</span><span>JavaScript</span></div>
       </div>
     </div>
@@ -819,8 +836,8 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="project-card reveal" data-cat="erp">
       <div class="project-top"><span class="project-icon">🌾</span><span class="project-tag">ERP</span></div>
       <div class="project-content">
-        <div class="project-title">Gestion de Ferme</div>
-        <p class="project-desc">Application ERP sur mesure développée avec Odoo : suivi des cultures/élevage, stocks, ventes et rapports.</p>
+        <div class="project-title" data-i18n="projects.p4.title">Gestion de Ferme</div>
+        <p class="project-desc" data-i18n="projects.p4.desc">Application ERP sur mesure développée avec Odoo : suivi des cultures/élevage, stocks, ventes et rapports.</p>
         <div class="project-tags"><span>Odoo</span><span>Python</span><span>PostgreSQL</span></div>
       </div>
     </div>
@@ -828,8 +845,8 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="project-card reveal" data-cat="web">
       <div class="project-top"><span class="project-icon">🏫</span><span class="project-tag">Web</span></div>
       <div class="project-content">
-        <div class="project-title">Gestion des Écoles</div>
-        <p class="project-desc">Application de gestion scolaire en Python pour élèves, enseignants, classes, notes et emplois du temps.</p>
+        <div class="project-title" data-i18n="projects.p5.title">Gestion des Écoles</div>
+        <p class="project-desc" data-i18n="projects.p5.desc">Application de gestion scolaire en Python pour élèves, enseignants, classes, notes et emplois du temps.</p>
         <div class="project-tags"><span>Python</span><span>Django</span><span>MySQL</span></div>
       </div>
     </div>
@@ -837,8 +854,8 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <div class="project-card reveal" data-cat="mobile">
       <div class="project-top"><span class="project-icon">📱</span><span class="project-tag">Mobile</span></div>
       <div class="project-content">
-        <div class="project-title">Application Mobile Cross-Platform</div>
-        <p class="project-desc">Application iOS/Android avec interface moderne, intégration d'APIs et gestion d'état avancée.</p>
+        <div class="project-title" data-i18n="projects.p6.title">Application Mobile Cross-Platform</div>
+        <p class="project-desc" data-i18n="projects.p6.desc">Application iOS/Android avec interface moderne, intégration d'APIs et gestion d'état avancée.</p>
         <div class="project-tags"><span>Flutter</span><span>Dart</span><span>Provider</span></div>
       </div>
     </div>
@@ -847,31 +864,31 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- AVIS -->
 <section id="avis">
-  <div class="eyebrow">// Avis</div>
-  <h2 class="sec-title reveal">Ce qu'ils disent</h2>
-  <p class="sec-desc reveal">Les avis de ceux qui ont travaillé ou collaboré avec moi.</p>
+  <div class="eyebrow" data-i18n="testimonials.eyebrow">// Avis</div>
+  <h2 class="sec-title reveal" data-i18n="testimonials.title">Ce qu'ils disent</h2>
+  <p class="sec-desc reveal" data-i18n="testimonials.desc">Les avis de ceux qui ont travaillé ou collaboré avec moi.</p>
 
   <div class="testimonials-grid">
     <div class="testimonial-card reveal">
       <div class="t-stars">★★★★★</div>
-      <p class="t-quote">"Brinda s'est démarquée dès le début de la formation par sa rigueur et sa curiosité. Elle assimile rapidement les concepts complexes et livre un code propre et bien structuré. Une développeuse avec un vrai potentiel."</p>
+      <p class="t-quote" data-i18n="testimonials.t1.quote">"Brinda s'est démarquée dès le début de la formation par sa rigueur et sa curiosité. Elle assimile rapidement les concepts complexes et livre un code propre et bien structuré. Une développeuse avec un vrai potentiel."</p>
       <div class="t-author">
         <div class="t-avatar">F</div>
         <div>
           <h4>Fomubad Borista Fondi</h4>
-          <span>Formateur — LocalHost Academy</span>
+          <span data-i18n="testimonials.t1.role">Formateur — LocalHost Academy</span>
         </div>
       </div>
     </div>
 
     <div class="testimonial-card reveal">
       <div class="t-stars">★★★★★</div>
-      <p class="t-quote">"J'ai encadré Brinda sur plusieurs projets full stack et elle a toujours tenu ses délais. Elle pose les bonnes questions, découpe proprement ses composants et n'hésite jamais à revoir son architecture pour gagner en qualité. Un profil fiable, autonome et très agréable en équipe."</p>
+      <p class="t-quote" data-i18n="testimonials.t2.quote">"J'ai encadré Brinda sur plusieurs projets full stack et elle a toujours tenu ses délais. Elle pose les bonnes questions, découpe proprement ses composants et n'hésite jamais à revoir son architecture pour gagner en qualité. Un profil fiable, autonome et très agréable en équipe."</p>
       <div class="t-author">
         <div class="t-avatar">FE</div>
         <div>
           <h4>Folong Emerson</h4>
-          <span>Encadreur — Développeur Senior</span>
+          <span data-i18n="testimonials.t2.role">Encadreur — Développeur Senior</span>
         </div>
       </div>
     </div>
@@ -880,9 +897,9 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- TOOLS -->
 <section id="outils">
-  <div class="eyebrow">// Outils</div>
-  <h2 class="sec-title reveal">Outils que j'utilise</h2>
-  <p class="sec-desc reveal">Mon environnement de travail au quotidien.</p>
+  <div class="eyebrow" data-i18n="tools.eyebrow">// Outils</div>
+  <h2 class="sec-title reveal" data-i18n="tools.title">Outils que j'utilise</h2>
+  <p class="sec-desc reveal" data-i18n="tools.desc">Mon environnement de travail au quotidien.</p>
   <div class="tools-grid">
     <div class="tool-card reveal"><div class="tech-icon" style="background:#007acc">VS</div><span class="tname">VS Code</span></div>
     <div class="tool-card reveal"><div class="tech-icon" style="background:#f05032">Git</div><span class="tname">Git</span></div>
@@ -895,23 +912,23 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="eyebrow">// Contact</div>
-  <h2 class="sec-title reveal">Parlons-en</h2>
-  <p class="sec-desc reveal">Une idée de projet ou une opportunité ? Écrivez-moi.</p>
+  <div class="eyebrow" data-i18n="contact.eyebrow">// Contact</div>
+  <h2 class="sec-title reveal" data-i18n="contact.title">Parlons-en</h2>
+  <p class="sec-desc reveal" data-i18n="contact.desc">Une idée de projet ou une opportunité ? Écrivez-moi.</p>
   <div class="contact-grid">
     <div class="contact-info">
       <div class="c-item reveal"><div class="c-icon">📧</div><div><h4>Email</h4><p>brinda25042007@gmail.com</p></div></div>
-      <div class="c-item reveal"><div class="c-icon">📱</div><div><h4>Téléphone / WhatsApp</h4><p>+237 689991840</p></div></div>
-      <div class="c-item reveal"><div class="c-icon">📍</div><div><h4>Localisation</h4><p>Yaoundé, Cameroun</p></div></div>
+      <div class="c-item reveal"><div class="c-icon">📱</div><div><h4 data-i18n="contact.phone">Téléphone / WhatsApp</h4><p>+237 689991840</p></div></div>
+      <div class="c-item reveal"><div class="c-icon">📍</div><div><h4 data-i18n="contact.location">Localisation</h4><p data-i18n="about.locationVal">Yaoundé, Cameroun</p></div></div>
       <div class="c-item reveal"><div class="c-icon">💻</div><div><h4>GitHub</h4><p>github.com/brindadbc</p></div></div>
       <div class="c-item reveal"><div class="c-icon">🔗</div><div><h4>LinkedIn</h4><p>linkedin.com/in/brinda-carelle-djuikouo</p></div></div>
     </div>
     <form class="contact-form reveal" onsubmit="handleSubmit(event)">
-      <div class="f-group"><label>Nom complet</label><input type="text" required></div>
+      <div class="f-group"><label data-i18n="contact.fullName">Nom complet</label><input type="text" required></div>
       <div class="f-group"><label>Email</label><input type="email" required></div>
-      <div class="f-group"><label>Sujet</label><input type="text" required></div>
-      <div class="f-group"><label>Message</label><textarea required></textarea></div>
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Envoyer le message</button>
+      <div class="f-group"><label data-i18n="contact.subject">Sujet</label><input type="text" required></div>
+      <div class="f-group"><label data-i18n="contact.message">Message</label><textarea required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;" data-i18n="contact.send">Envoyer le message</button>
     </form>
   </div>
 </section>
@@ -922,7 +939,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
     <a href="https://github.com/brindadbc" target="_blank">GH</a>
     <a href="https://www.linkedin.com/in/brinda-carelle-djuikouo-858b60353" target="_blank">in</a>
   </div>
-  <p>© 2026 Brinda Carelle DJUIKOUO — Développeuse Full Stack · Yaoundé, Cameroun</p>
+  <p data-i18n="footer.line">© 2026 Brinda Carelle DJUIKOUO — Développeuse Full Stack · Yaoundé, Cameroun</p>
 </footer>
 
 <script>
@@ -976,6 +993,7 @@ function typeLoop(){
 typeLoop();
 
 /* ---- terminal loading bar ---- */
+const loadedTexts = { fr:'Profil chargé ✓ 100%', en:'Profile loaded ✓ 100%' };
 window.addEventListener('load',()=>{
   setTimeout(()=>{
     document.getElementById('termFill').style.width='100%';
@@ -983,8 +1001,8 @@ window.addEventListener('load',()=>{
     const pctEl=document.getElementById('termPct');
     const iv=setInterval(()=>{
       p+=4;
-      if(p>=100){p=100;clearInterval(iv);pctEl.textContent='Profil chargé ✓ 100%';}
-      else{pctEl.textContent='Chargement du profil… '+p+'%';}
+      if(p>=100){p=100;clearInterval(iv);pctEl.textContent=loadedTexts[currentLang];}
+      else{pctEl.textContent=i18n[currentLang]['terminal.loading'].replace('{p}',p);}
     },90);
   },300);
 });
@@ -1037,11 +1055,202 @@ document.querySelectorAll('.f-btn').forEach(btn=>{
 });
 
 /* ---- contact form ---- */
+const formTexts = {
+  fr: 'Merci pour votre message ! Je vous répondrai dans les plus brefs délais.',
+  en: 'Thanks for your message! I will get back to you as soon as possible.'
+};
 function handleSubmit(e){
   e.preventDefault();
-  alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
+  alert(formTexts[currentLang]);
   e.target.reset();
 }
+
+/* ---- i18n ---- */
+const i18n = {
+  fr:{
+    "nav.home":"Accueil","nav.stack":"Stack","nav.about":"À propos","nav.skills":"Compétences",
+    "nav.path":"Parcours","nav.projects":"Projets","nav.testimonials":"Avis","nav.contact":"Contact",
+    "nav.available":"Disponible pour un stage/emploi",
+    "hero.badge":"// Bonjour, je suis",
+    "hero.subtitle":"{ Développeuse Full Stack }",
+    "hero.tagline":"Étudiante en Informatique à Yaoundé (Licence 2) — je conçois des applications web, mobiles et des solutions ERP, du back-end au déploiement.",
+    "hero.ctaProjects":"Voir mes projets",
+    "hero.ctaCv":"⬇ Télécharger mon CV",
+    "hero.scroll":"Découvrir ↓",
+    "stack.eyebrow":"// Stack principale",
+    "stack.title":"Ma stack de prédilection",
+    "stack.desc":"Les quatre technologies au cœur de la plupart de mes applications web.",
+    "stack.orbitLine1":"Développeuse",
+    "stack.orbitDesc":"Je développe des applications web complètes avec la stack MERN : MongoDB pour les données, Express.js et Node.js pour le back-end, React.js pour le front-end. Le tout déployé avec Docker et des services cloud.",
+    "about.eyebrow":"// About",
+    "about.title":"Qui je suis",
+    "about.desc":"Une brève présentation de mon profil et de mon approche du développement.",
+    "about.p1":"Développeuse full stack polyvalente et étudiante en informatique à Yaoundé, passionnée par la création de solutions numériques qui répondent à des besoins concrets.",
+    "about.p2":"Je travaille aussi bien sur le web (MERN, Next.js, Nest.js, Laravel, Django) que sur le mobile (Flutter) et les systèmes ERP (Odoo), et je maîtrise le déploiement de bout en bout avec Docker et des services cloud comme Firebase, Supabase, Cloudinary et Render.",
+    "about.p3":"Curieuse et rigoureuse, je suis toujours en train d'apprendre de nouveaux outils pour livrer des produits solides et bien pensés.",
+    "about.tag1":"Développement Front-End","about.tag2":"Développement Back-End",
+    "about.tag3":"Résolution de problèmes","about.tag4":"Travail d'équipe",
+    "about.name":"Nom","about.email":"Email","about.phone":"Téléphone","about.location":"Localisation",
+    "about.locationVal":"Yaoundé, Cameroun",
+    "skills.eyebrow":"// Compétences","skills.title":"Mes compétences",
+    "skills.desc":"Un aperçu des technologies et outils que j'utilise au quotidien.",
+    "skills.mainTitle":"▸ Compétences principales",
+    "skills.catFrontend":"Front-End","skills.catBackend":"Back-End","skills.catMobile":"Mobile & ERP",
+    "skills.catDb":"Bases de données","skills.catCloud":"Cloud & Services","skills.catVersioning":"Versioning & API",
+    "path.eyebrow":"// Éducation & Expérience","path.title":"Mon parcours",
+    "path.desc":"Ma formation académique et mes expériences professionnelles.",
+    "path.tabEdu":"🎓 Formation","path.tabExp":"💼 Expérience","path.tabCert":"🏆 Certifications",
+    "path.edu1.date":"2025 – 2026 · En cours","path.edu1.title":"Licence 2 — Informatique",
+    "path.edu1.org":"Yaoundé, Cameroun","path.edu1.desc":"Approfondissement en génie logiciel, bases de données et architectures d'applications.",
+    "path.edu2.title":"BTS — Informatique","path.edu2.org":"Yaoundé, Cameroun",
+    "path.edu2.desc":"Formation technique en développement d'applications et systèmes d'information.",
+    "path.edu3.title":"Formation Full Stack (MERN)","path.edu3.desc":"Formation intensive : JavaScript, React.js, Node.js, MongoDB.",
+    "path.edu4.date":"2022 – 2023","path.edu4.title":"Baccalauréat Série C (Scientifique)",
+    "path.edu4.org":"Yaoundé, Cameroun","path.edu4.desc":"Série scientifique, spécialité mathématiques/physique.",
+    "path.exp1.date":"Nov 2024 – Présent","path.exp1.title":"Développeuse Full Stack",
+    "path.exp1.li1":"Développement d'applications web complètes avec architectures scalables",
+    "path.exp1.li2":"Création d'un portail d'emploi avec suivi des candidatures",
+    "path.exp1.li3":"Interfaces modernes et responsives avec React.js",
+    "path.exp2.date":"Avr – Juin 2025","path.exp2.title":"Stagiaire Développeuse Web",
+    "path.exp2.org":"Chambre des Comptes du Cameroun · Yaoundé",
+    "path.exp2.li1":"Développement de l'Observatoire des Collectivités Territoriales",
+    "path.exp2.li2":"Tableaux de bord interactifs et cartes géographiques",
+    "path.exp2.li3":"Amélioration de 40% de la lisibilité des données",
+    "path.cert1.title":"Certification — Développement Full Stack PHP",
+    "path.cert1.desc":"Développement d'applications web avec PHP et le framework Laravel : architecture MVC, gestion de base de données et API.",
+    "path.cert2.title":"Certification — Développement Mobile Flutter",
+    "path.cert2.desc":"Création d'applications mobiles cross-platform (iOS/Android) avec Flutter et Dart.",
+    "path.cert3.title":"Certification — Développement Web JavaScript (Full Stack)",
+    "path.cert3.desc":"Développement full stack avec JavaScript : React.js, Node.js, Express.js et MongoDB (stack MERN).",
+    "projects.eyebrow":"// Projets","projects.title":"Mes projets",
+    "projects.desc":"Quelques réalisations qui illustrent mes compétences.","projects.filterAll":"Tous",
+    "projects.p1.title":"Portail d'Emploi","projects.p1.desc":"Application complète de gestion de candidatures avec matching automatique CV/offres et dashboard analytics en temps réel.",
+    "projects.p2.desc":"Application mobile et web publiée sur le Play Store, avec une expérience unifiée sur les deux plateformes et une intégration cloud.",
+    "projects.p3.title":"Observatoire des Collectivités","projects.p3.desc":"Plateforme de visualisation de données financières avec tableaux de bord interactifs et cartes géographiques.",
+    "projects.p4.title":"Gestion de Ferme","projects.p4.desc":"Application ERP sur mesure développée avec Odoo : suivi des cultures/élevage, stocks, ventes et rapports.",
+    "projects.p5.title":"Gestion des Écoles","projects.p5.desc":"Application de gestion scolaire en Python pour élèves, enseignants, classes, notes et emplois du temps.",
+    "projects.p6.title":"Application Mobile Cross-Platform","projects.p6.desc":"Application iOS/Android avec interface moderne, intégration d'APIs et gestion d'état avancée.",
+    "testimonials.eyebrow":"// Avis","testimonials.title":"Ce qu'ils disent",
+    "testimonials.desc":"Les avis de ceux qui ont travaillé ou collaboré avec moi.",
+    "testimonials.t1.quote":"\"Brinda s'est démarquée dès le début de la formation par sa rigueur et sa curiosité. Elle assimile rapidement les concepts complexes et livre un code propre et bien structuré. Une développeuse avec un vrai potentiel.\"",
+    "testimonials.t1.role":"Formateur — LocalHost Academy",
+    "testimonials.t2.quote":"\"J'ai encadré Brinda sur plusieurs projets full stack et elle a toujours tenu ses délais. Elle pose les bonnes questions, découpe proprement ses composants et n'hésite jamais à revoir son architecture pour gagner en qualité. Un profil fiable, autonome et très agréable en équipe.\"",
+    "testimonials.t2.role":"Encadreur — Développeur Senior",
+    "tools.eyebrow":"// Outils","tools.title":"Outils que j'utilise","tools.desc":"Mon environnement de travail au quotidien.",
+    "contact.eyebrow":"// Contact","contact.title":"Parlons-en","contact.desc":"Une idée de projet ou une opportunité ? Écrivez-moi.",
+    "contact.phone":"Téléphone / WhatsApp","contact.location":"Localisation",
+    "contact.fullName":"Nom complet","contact.subject":"Sujet","contact.message":"Message","contact.send":"Envoyer le message",
+    "footer.line":"© 2026 Brinda Carelle DJUIKOUO — Développeuse Full Stack · Yaoundé, Cameroun",
+    "terminal.loading":"Chargement du profil… {p}%"
+  },
+  en:{
+    "nav.home":"Home","nav.stack":"Stack","nav.about":"About","nav.skills":"Skills",
+    "nav.path":"Journey","nav.projects":"Projects","nav.testimonials":"Testimonials","nav.contact":"Contact",
+    "nav.available":"Open to internships/jobs",
+    "hero.badge":"// Hi, I'm",
+    "hero.subtitle":"{ Full Stack Developer }",
+    "hero.tagline":"Computer Science student in Yaoundé (2nd year Bachelor's) — I build web and mobile applications and ERP solutions, from back-end to deployment.",
+    "hero.ctaProjects":"View my projects",
+    "hero.ctaCv":"⬇ Download my CV",
+    "hero.scroll":"Discover ↓",
+    "stack.eyebrow":"// Core stack",
+    "stack.title":"My go-to stack",
+    "stack.desc":"The four technologies at the core of most of my web applications.",
+    "stack.orbitLine1":"Full Stack",
+    "stack.orbitDesc":"I build complete web applications with the MERN stack: MongoDB for data, Express.js and Node.js for the back-end, React.js for the front-end. All deployed with Docker and cloud services.",
+    "about.eyebrow":"// About",
+    "about.title":"Who I am",
+    "about.desc":"A short introduction to my profile and my approach to development.",
+    "about.p1":"A versatile full stack developer and computer science student in Yaoundé, passionate about building digital solutions that solve real problems.",
+    "about.p2":"I work across the web (MERN, Next.js, Nest.js, Laravel, Django), mobile (Flutter) and ERP systems (Odoo), and I handle end-to-end deployment with Docker and cloud services like Firebase, Supabase, Cloudinary and Render.",
+    "about.p3":"Curious and rigorous, I'm always learning new tools to deliver solid, well thought-out products.",
+    "about.tag1":"Front-End Development","about.tag2":"Back-End Development",
+    "about.tag3":"Problem Solving","about.tag4":"Teamwork",
+    "about.name":"Name","about.email":"Email","about.phone":"Phone","about.location":"Location",
+    "about.locationVal":"Yaoundé, Cameroon",
+    "skills.eyebrow":"// Skills","skills.title":"My skills",
+    "skills.desc":"An overview of the technologies and tools I use every day.",
+    "skills.mainTitle":"▸ Core skills",
+    "skills.catFrontend":"Front-End","skills.catBackend":"Back-End","skills.catMobile":"Mobile & ERP",
+    "skills.catDb":"Databases","skills.catCloud":"Cloud & Services","skills.catVersioning":"Versioning & API",
+    "path.eyebrow":"// Education & Experience","path.title":"My journey",
+    "path.desc":"My academic background and professional experience.",
+    "path.tabEdu":"🎓 Education","path.tabExp":"💼 Experience","path.tabCert":"🏆 Certifications",
+    "path.edu1.date":"2025 – 2026 · Ongoing","path.edu1.title":"2nd Year Bachelor's — Computer Science",
+    "path.edu1.org":"Yaoundé, Cameroon","path.edu1.desc":"Deepening skills in software engineering, databases and application architecture.",
+    "path.edu2.title":"Higher Technician's Diploma — Computer Science","path.edu2.org":"Yaoundé, Cameroon",
+    "path.edu2.desc":"Technical training in application development and information systems.",
+    "path.edu3.title":"Full Stack Training (MERN)","path.edu3.desc":"Intensive training: JavaScript, React.js, Node.js, MongoDB.",
+    "path.edu4.date":"2022 – 2023","path.edu4.title":"High School Diploma, Science Track (Series C)",
+    "path.edu4.org":"Yaoundé, Cameroon","path.edu4.desc":"Science track, majoring in mathematics/physics.",
+    "path.exp1.date":"Nov 2024 – Present","path.exp1.title":"Full Stack Developer",
+    "path.exp1.li1":"Built complete web applications with scalable architectures",
+    "path.exp1.li2":"Created a job portal with application tracking",
+    "path.exp1.li3":"Modern, responsive interfaces with React.js",
+    "path.exp2.date":"Apr – Jun 2025","path.exp2.title":"Web Developer Intern",
+    "path.exp2.org":"Cameroon Audit Bench (Chambre des Comptes) · Yaoundé",
+    "path.exp2.li1":"Built the Local Government Observatory platform",
+    "path.exp2.li2":"Interactive dashboards and geographic maps",
+    "path.exp2.li3":"Improved data readability by 40%",
+    "path.cert1.title":"Certification — Full Stack PHP Development",
+    "path.cert1.desc":"Web application development with PHP and the Laravel framework: MVC architecture, database management and APIs.",
+    "path.cert2.title":"Certification — Flutter Mobile Development",
+    "path.cert2.desc":"Building cross-platform (iOS/Android) mobile apps with Flutter and Dart.",
+    "path.cert3.title":"Certification — JavaScript Web Development (Full Stack)",
+    "path.cert3.desc":"Full stack development with JavaScript: React.js, Node.js, Express.js and MongoDB (MERN stack).",
+    "projects.eyebrow":"// Projects","projects.title":"My projects",
+    "projects.desc":"A few works that showcase my skills.","projects.filterAll":"All",
+    "projects.p1.title":"Job Portal","projects.p1.desc":"Full application management platform with automatic CV/job matching and real-time analytics dashboard.",
+    "projects.p2.desc":"Mobile and web app published on the Play Store, with a unified experience across both platforms and cloud integration.",
+    "projects.p3.title":"Local Government Observatory","projects.p3.desc":"Financial data visualization platform with interactive dashboards and geographic maps.",
+    "projects.p4.title":"Farm Management","projects.p4.desc":"Custom ERP application built with Odoo: crop/livestock tracking, inventory, sales and reports.",
+    "projects.p5.title":"School Management System","projects.p5.desc":"Python school management application for students, teachers, classes, grades and timetables.",
+    "projects.p6.title":"Cross-Platform Mobile App","projects.p6.desc":"iOS/Android app with a modern interface, API integration and advanced state management.",
+    "testimonials.eyebrow":"// Testimonials","testimonials.title":"What they say",
+    "testimonials.desc":"Feedback from people who have worked or collaborated with me.",
+    "testimonials.t1.quote":"\"Brinda stood out from the start of the training with her rigor and curiosity. She quickly grasps complex concepts and delivers clean, well-structured code. A developer with real potential.\"",
+    "testimonials.t1.role":"Trainer — LocalHost Academy",
+    "testimonials.t2.quote":"\"I supervised Brinda on several full stack projects and she always met her deadlines. She asks the right questions, structures her components cleanly, and never hesitates to revisit her architecture to improve quality. A reliable, independent, and very pleasant profile to work with.\"",
+    "testimonials.t2.role":"Supervisor — Senior Developer",
+    "tools.eyebrow":"// Tools","tools.title":"Tools I use","tools.desc":"My everyday working environment.",
+    "contact.eyebrow":"// Contact","contact.title":"Let's talk","contact.desc":"Have a project idea or an opportunity? Write to me.",
+    "contact.phone":"Phone / WhatsApp","contact.location":"Location",
+    "contact.fullName":"Full name","contact.subject":"Subject","contact.message":"Message","contact.send":"Send message",
+    "footer.line":"© 2026 Brinda Carelle DJUIKOUO — Full Stack Developer · Yaoundé, Cameroon",
+    "terminal.loading":"Loading profile… {p}%"
+  }
+};
+
+const heroPhrases = {
+  fr:['Brinda Carelle DJUIKOUO','Développeuse Full Stack','Étudiante en Informatique — Yaoundé'],
+  en:['Brinda Carelle DJUIKOUO','Full Stack Developer','Computer Science Student — Yaoundé']
+};
+
+let currentLang = localStorage.getItem('portfolio-lang') || 'fr';
+
+function applyLang(lang){
+  currentLang = lang;
+  localStorage.setItem('portfolio-lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(i18n[lang][key] !== undefined){ el.textContent = i18n[lang][key]; }
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===lang);
+  });
+  phrases.length = 0;
+  heroPhrases[lang].forEach(p=>phrases.push(p));
+  pIdx = 0; cIdx = 0; deleting = false;
+}
+
+document.getElementById('langSwitch').addEventListener('click',(e)=>{
+  const btn = e.target.closest('button[data-lang]');
+  if(!btn) return;
+  applyLang(btn.dataset.lang);
+});
+
+applyLang(currentLang);
 </script>
 </body>
 </html>
