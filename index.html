@@ -21,6 +21,17 @@
   --mono:'JetBrains Mono', monospace;
   --sans:'Space Grotesk', sans-serif;
 }
+:root[data-theme="light"]{
+  --bg:#f7f6f2;
+  --bg-soft:#efeee8;
+  --card:#ffffff;
+  --border:#e2e0d6;
+  --gold:#c98a1a;
+  --gold-dim:#a86f12;
+  --text:#141414;
+  --text-dim:#5c5c5c;
+  --text-faint:#9a9a9a;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -29,6 +40,7 @@ body{
   color:var(--text);
   overflow-x:hidden;
   line-height:1.6;
+  transition:background .35s ease, color .35s ease;
 }
 ::selection{background:var(--gold);color:#000;}
 a{color:inherit;}
@@ -122,6 +134,16 @@ nav{
   padding:0.4rem 0.7rem;border-radius:20px;cursor:pointer;transition:all .2s;
 }
 .lang-switch button.active{background:var(--gold);color:#0a0a0a;}
+
+/* ============ THEME TOGGLE ============ */
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border);background:var(--card);
+  color:var(--gold);font-size:1.05rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s;flex-shrink:0;
+}
+.theme-toggle:hover{border-color:var(--gold);transform:translateY(-2px);}
 
 /* ============ BUTTONS ============ */
 .btn{
@@ -415,6 +437,7 @@ section{
 .project-card{
   border:1px solid var(--border);background:var(--card);border-radius:var(--radius);
   overflow:hidden;transition:all .3s;display:flex;flex-direction:column;
+  cursor:pointer;
 }
 .project-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
 .project-card.hidden{display:none;}
@@ -431,6 +454,11 @@ section{
   font-family:var(--mono);font-size:0.72rem;color:var(--text-dim);
   border:1px solid var(--border);padding:0.25rem 0.6rem;border-radius:6px;
 }
+.project-link-row{
+  display:flex;align-items:center;gap:0.4rem;margin-top:1rem;
+  font-family:var(--mono);font-size:0.78rem;color:var(--gold);
+}
+.project-link-row.restricted{color:var(--text-faint);}
 
 /* ============ AVIS / TESTIMONIALS ============ */
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.6rem;}
@@ -500,6 +528,27 @@ footer{
 .footer-social a:hover{border-color:var(--gold);color:var(--gold);}
 footer p{color:var(--text-faint);font-size:0.85rem;}
 
+/* ============ RESTRICTED MODAL ============ */
+.restricted-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,0.6);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s ease;
+}
+.restricted-overlay.active{opacity:1;pointer-events:all;}
+.restricted-modal{
+  max-width:420px;width:100%;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:2.2rem 2rem;text-align:center;
+  transform:translateY(12px);transition:transform .25s ease;
+  box-shadow:0 30px 70px rgba(0,0,0,0.5);
+}
+.restricted-overlay.active .restricted-modal{transform:translateY(0);}
+.restricted-icon{font-size:2.4rem;margin-bottom:1rem;}
+.restricted-modal p{color:var(--text-dim);font-size:0.95rem;margin-bottom:1.6rem;line-height:1.6;}
+
 /* ============ RESPONSIVE ============ */
 @media(max-width:900px){
   .about-grid,.contact-grid{grid-template-columns:1fr;}
@@ -533,6 +582,7 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
       <button data-lang="fr" class="active">FR</button>
       <button data-lang="en">EN</button>
     </div>
+    <button class="theme-toggle" id="themeToggle" title="Changer de thème" aria-label="Changer de thème">☀️</button>
     <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
       <span></span><span></span><span></span>
     </div>
@@ -806,57 +856,63 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
   </div>
 
   <div class="projects-grid">
-    <div class="project-card reveal" data-cat="web">
+    <div class="project-card reveal" data-cat="web" data-restricted="true">
       <div class="project-top"><span class="project-icon">💼</span><span class="project-tag">Web</span></div>
       <div class="project-content">
         <div class="project-title" data-i18n="projects.p1.title">Portail d'Emploi</div>
         <p class="project-desc" data-i18n="projects.p1.desc">Application complète de gestion de candidatures avec matching automatique CV/offres et dashboard analytics en temps réel.</p>
         <div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+        <div class="project-link-row restricted" data-i18n="projects.linkRestricted">🔒 Projet privé</div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="mobile">
+    <div class="project-card reveal" data-cat="mobile" data-link="https://play.google.com/store/apps/details?id=com.gadgets.com">
       <div class="project-top"><span class="project-icon">🛠️</span><span class="project-tag">Mobile / Web</span></div>
       <div class="project-content">
         <div class="project-title">Gadgets</div>
         <p class="project-desc" data-i18n="projects.p2.desc">Application mobile et web publiée sur le Play Store, avec une expérience unifiée sur les deux plateformes et une intégration cloud.</p>
         <div class="project-tags"><span>Flutter</span><span>Firebase</span><span>Next.js</span></div>
+        <div class="project-link-row" data-i18n="projects.linkOpen">↗ Voir le projet</div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="web">
+    <div class="project-card reveal" data-cat="web" data-restricted="true">
       <div class="project-top"><span class="project-icon">📊</span><span class="project-tag">Web</span></div>
       <div class="project-content">
         <div class="project-title" data-i18n="projects.p3.title">Observatoire des Collectivités</div>
         <p class="project-desc" data-i18n="projects.p3.desc">Plateforme de visualisation de données financières avec tableaux de bord interactifs et cartes géographiques.</p>
         <div class="project-tags"><span>Laravel</span><span>MySQL</span><span>JavaScript</span></div>
+        <div class="project-link-row" data-i18n="projects.linkOpen">🔒 Projet privé</div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="erp">
+    <div class="project-card reveal" data-cat="erp" data-restricted="true">
       <div class="project-top"><span class="project-icon">🌾</span><span class="project-tag">ERP</span></div>
       <div class="project-content">
         <div class="project-title" data-i18n="projects.p4.title">Gestion de Ferme</div>
         <p class="project-desc" data-i18n="projects.p4.desc">Application ERP sur mesure développée avec Odoo : suivi des cultures/élevage, stocks, ventes et rapports.</p>
         <div class="project-tags"><span>Odoo</span><span>Python</span><span>PostgreSQL</span></div>
+        <div class="project-link-row restricted" data-i18n="projects.linkRestricted">🔒 Projet privé</div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="web">
+    <div class="project-card reveal" data-cat="web" data-link="https://iris-school.onrender.com/">
       <div class="project-top"><span class="project-icon">🏫</span><span class="project-tag">Web</span></div>
       <div class="project-content">
         <div class="project-title" data-i18n="projects.p5.title">Gestion des Écoles</div>
         <p class="project-desc" data-i18n="projects.p5.desc">Application de gestion scolaire en Python pour élèves, enseignants, classes, notes et emplois du temps.</p>
         <div class="project-tags"><span>Python</span><span>Django</span><span>MySQL</span></div>
+        <div class="project-link-row" data-i18n="projects.linkOpen">↗ Voir le projet</div>
       </div>
     </div>
 
-    <div class="project-card reveal" data-cat="mobile">
+    <div class="project-card reveal" data-cat="mobile" data-restricted="true">
       <div class="project-top"><span class="project-icon">📱</span><span class="project-tag">Mobile</span></div>
       <div class="project-content">
         <div class="project-title" data-i18n="projects.p6.title">Application Mobile Cross-Platform</div>
         <p class="project-desc" data-i18n="projects.p6.desc">Application iOS/Android avec interface moderne, intégration d'APIs et gestion d'état avancée.</p>
         <div class="project-tags"><span>Flutter</span><span>Dart</span><span>Provider</span></div>
+        <div class="project-link-row restricted" data-i18n="projects.linkRestricted">🔒 Projet privé</div>
       </div>
     </div>
   </div>
@@ -941,6 +997,15 @@ footer p{color:var(--text-faint);font-size:0.85rem;}
   </div>
   <p data-i18n="footer.line">© 2026 Brinda Carelle DJUIKOUO — Développeuse Full Stack · Yaoundé, Cameroun</p>
 </footer>
+
+<!-- RESTRICTED PROJECT MODAL -->
+<div class="restricted-overlay" id="restrictedOverlay">
+  <div class="restricted-modal">
+    <div class="restricted-icon">🔒</div>
+    <p id="restrictedText" data-i18n="modal.restrictedText">Ce site ou cette application appartient à l'entreprise pour laquelle il a été développé et n'est pas accessible aux personnes externes à l'entreprise.</p>
+    <button class="btn btn-primary" id="restrictedClose" data-i18n="modal.close">Fermer</button>
+  </div>
+</div>
 
 <script>
 /* ---- mobile menu ---- */
@@ -1054,6 +1119,25 @@ document.querySelectorAll('.f-btn').forEach(btn=>{
   });
 });
 
+/* ---- project card click: open link or show restricted modal ---- */
+const restrictedOverlay = document.getElementById('restrictedOverlay');
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const link = card.dataset.link;
+    if(link){
+      window.open(link, '_blank', 'noopener');
+    } else {
+      restrictedOverlay.classList.add('active');
+    }
+  });
+});
+document.getElementById('restrictedClose').addEventListener('click',()=>{
+  restrictedOverlay.classList.remove('active');
+});
+restrictedOverlay.addEventListener('click',(e)=>{
+  if(e.target === restrictedOverlay){ restrictedOverlay.classList.remove('active'); }
+});
+
 /* ---- contact form ---- */
 const formTexts = {
   fr: 'Merci pour votre message ! Je vous répondrai dans les plus brefs délais.',
@@ -1063,6 +1147,22 @@ function handleSubmit(e){
   e.preventDefault();
   alert(formTexts[currentLang]);
   e.target.reset();
+}
+
+/* ---- theme toggle ---- */
+const themeToggle = document.getElementById('themeToggle');
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('portfolio-theme', theme);
+  if(themeToggle){ themeToggle.textContent = theme === 'light' ? '🌙' : '☀️'; }
+}
+let currentTheme = localStorage.getItem('portfolio-theme') || 'dark';
+applyTheme(currentTheme);
+if(themeToggle){
+  themeToggle.addEventListener('click',()=>{
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(currentTheme);
+  });
 }
 
 /* ---- i18n ---- */
@@ -1124,6 +1224,8 @@ const i18n = {
     "path.cert3.desc":"Développement full stack avec JavaScript : React.js, Node.js, Express.js et MongoDB (stack MERN).",
     "projects.eyebrow":"// Projets","projects.title":"Mes projets",
     "projects.desc":"Quelques réalisations qui illustrent mes compétences.","projects.filterAll":"Tous",
+    "projects.linkOpen":"↗ Voir le projet",
+    "projects.linkRestricted":"🔒 Projet privé",
     "projects.p1.title":"Portail d'Emploi","projects.p1.desc":"Application complète de gestion de candidatures avec matching automatique CV/offres et dashboard analytics en temps réel.",
     "projects.p2.desc":"Application mobile et web publiée sur le Play Store, avec une expérience unifiée sur les deux plateformes et une intégration cloud.",
     "projects.p3.title":"Observatoire des Collectivités","projects.p3.desc":"Plateforme de visualisation de données financières avec tableaux de bord interactifs et cartes géographiques.",
@@ -1141,7 +1243,9 @@ const i18n = {
     "contact.phone":"Téléphone / WhatsApp","contact.location":"Localisation",
     "contact.fullName":"Nom complet","contact.subject":"Sujet","contact.message":"Message","contact.send":"Envoyer le message",
     "footer.line":"© 2026 Brinda Carelle DJUIKOUO — Développeuse Full Stack · Yaoundé, Cameroun",
-    "terminal.loading":"Chargement du profil… {p}%"
+    "terminal.loading":"Chargement du profil… {p}%",
+    "modal.restrictedText":"Ce site ou cette application appartient à l'entreprise pour laquelle il a été développé et n'est pas accessible aux personnes externes à l'entreprise.",
+    "modal.close":"Fermer"
   },
   en:{
     "nav.home":"Home","nav.stack":"Stack","nav.about":"About","nav.skills":"Skills",
@@ -1200,6 +1304,8 @@ const i18n = {
     "path.cert3.desc":"Full stack development with JavaScript: React.js, Node.js, Express.js and MongoDB (MERN stack).",
     "projects.eyebrow":"// Projects","projects.title":"My projects",
     "projects.desc":"A few works that showcase my skills.","projects.filterAll":"All",
+    "projects.linkOpen":"↗ View project",
+    "projects.linkRestricted":"🔒 Private project",
     "projects.p1.title":"Job Portal","projects.p1.desc":"Full application management platform with automatic CV/job matching and real-time analytics dashboard.",
     "projects.p2.desc":"Mobile and web app published on the Play Store, with a unified experience across both platforms and cloud integration.",
     "projects.p3.title":"Local Government Observatory","projects.p3.desc":"Financial data visualization platform with interactive dashboards and geographic maps.",
@@ -1217,7 +1323,9 @@ const i18n = {
     "contact.phone":"Phone / WhatsApp","contact.location":"Location",
     "contact.fullName":"Full name","contact.subject":"Subject","contact.message":"Message","contact.send":"Send message",
     "footer.line":"© 2026 Brinda Carelle DJUIKOUO — Full Stack Developer · Yaoundé, Cameroon",
-    "terminal.loading":"Loading profile… {p}%"
+    "terminal.loading":"Loading profile… {p}%",
+    "modal.restrictedText":"This site or application belongs to the company it was developed for and is not accessible to people outside that company.",
+    "modal.close":"Close"
   }
 };
 
